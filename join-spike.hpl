@@ -23,28 +23,23 @@
   </notepads>
   <order>
     <hop>
-      <from>Sites</from>
-      <to>Log valid sites</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Agents</from>
-      <to>Log all agents</to>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Log all agents</from>
+      <from>Sites</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>Log valid agents</to>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Log valid sites</from>
-      <to>Merge join</to>
+      <from>Select values</from>
+      <to>Write valid agents</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -68,120 +63,6 @@
     </GUI>
   </transform>
   <transform>
-    <name>Log all agents</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>Y</limitRows>
-    <limitRowsNumber>20</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>id</name>
-      </field>
-      <field>
-        <name>site_id</name>
-      </field>
-      <field>
-        <name>site_name</name>
-      </field>
-      <field>
-        <name>telephone</name>
-      </field>
-      <field>
-        <name>agent_name</name>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Log valid agents</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>id</name>
-      </field>
-      <field>
-        <name>site_id</name>
-      </field>
-      <field>
-        <name>site_name</name>
-      </field>
-      <field>
-        <name>telephone</name>
-      </field>
-      <field>
-        <name>agent_name</name>
-      </field>
-      <field>
-        <name>site-site_id</name>
-      </field>
-      <field>
-        <name>site-site_name</name>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>144</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Log valid sites</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>Y</limitRows>
-    <limitRowsNumber>20</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>site-site_id</name>
-      </field>
-      <field>
-        <name>site-site_name</name>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>224</yloc>
-    </GUI>
-  </transform>
-  <transform>
     <name>Merge join</name>
     <type>MergeJoin</type>
     <description/>
@@ -199,11 +80,46 @@
     <keys_2>
       <key>site-site_id</key>
     </keys_2>
-    <transform1>Log all agents</transform1>
-    <transform2>Log valid sites</transform2>
+    <transform1>Agents</transform1>
+    <transform2>Sites</transform2>
     <attributes/>
     <GUI>
       <xloc>528</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>site_id</name>
+      </field>
+      <field>
+        <name>site_name</name>
+      </field>
+      <field>
+        <name>telephone</name>
+      </field>
+      <field>
+        <name>agent_name</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>672</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
@@ -224,6 +140,28 @@
     <GUI>
       <xloc>160</xloc>
       <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Write valid agents</name>
+    <type>BeamOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <file_description_name>fake-agents</file_description_name>
+    <file_prefix>fake_valid_agents</file_prefix>
+    <file_suffix>.beam</file_suffix>
+    <output_location>${PROJECT_HOME}/output_files/</output_location>
+    <windowed>N</windowed>
+    <attributes/>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>144</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
