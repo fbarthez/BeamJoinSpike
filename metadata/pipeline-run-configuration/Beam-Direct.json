@@ -1,0 +1,18 @@
+{
+  "engineRunConfiguration": {
+    "BeamDirectPipelineEngine": {
+      "tempLocation": "${java.io.tmpdir}",
+      "streamingHopTransformsBufferSize": "",
+      "number_of_workers": "",
+      "fatJar": "",
+      "userAgent": "Hop",
+      "streamingHopTransformsFlushInterval": "",
+      "transformPluginClasses": "",
+      "pluginsToStage": "",
+      "xpPluginClasses": ""
+    }
+  },
+  "configurationVariables": [],
+  "name": "Beam-Direct",
+  "description": ""
+}

@@ -1,0 +1,22 @@
+{
+  "enclosure": "",
+  "name": "fake-valid-sites",
+  "description": "",
+  "fieldDefinitions": [
+    {
+      "hopType": "Integer",
+      "precision": -1,
+      "name": "site-site_id",
+      "length": -1,
+      "formatMask": ""
+    },
+    {
+      "hopType": "String",
+      "precision": -1,
+      "name": "site-site_name",
+      "length": -1,
+      "formatMask": ""
+    }
+  ],
+  "separator": ","
+}

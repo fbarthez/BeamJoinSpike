@@ -1,0 +1,43 @@
+{
+  "enclosure": "",
+  "name": "fake-agents",
+  "description": "",
+  "fieldDefinitions": [
+    {
+      "hopType": "Integer",
+      "precision": -1,
+      "name": "id",
+      "length": -1,
+      "formatMask": ""
+    },
+    {
+      "hopType": "Integer",
+      "precision": -1,
+      "name": "site_id",
+      "length": -1,
+      "formatMask": ""
+    },
+    {
+      "hopType": "String",
+      "precision": -1,
+      "name": "site_name",
+      "length": -1,
+      "formatMask": ""
+    },
+    {
+      "hopType": "String",
+      "precision": -1,
+      "name": "telephone",
+      "length": -1,
+      "formatMask": ""
+    },
+    {
+      "hopType": "String",
+      "precision": -1,
+      "name": "agent_name",
+      "length": -1,
+      "formatMask": ""
+    }
+  ],
+  "separator": ","
+}
